@@ -7,6 +7,11 @@ from nltk.corpus import movie_reviews
 nltk.download('movie_reviews')
 
 from sklearn.naive_bayes import MultinomialNB
+from nltk.corpus import stopwords
+nltk.download('stopwords')
+
+from nltk.stem import WordNetLemmatizer 
+from nltk.tokenize import word_tokenize
 
 
 #1
@@ -24,15 +29,22 @@ def build_raw_data():
             raw_data.append(review_dictionary)
 
     print (len(raw_data))
-    print (raw_data[0].text)
+    # print (raw_data[0])
+    stop_words = set(stopwords.words('english')) 
+
+    # word_tokens = word_tokenize(raw_data[0]) 
+    # print(raw_data.[0])
+
+    lemmatizer = WordNetLemmatizer() 
 
 #2
 def feature_selection():
-    print(" beep bop")
+    print("beep bop")
+    
 
 #3
 def text_to_vector():
-    print("beep baap")
+    print("RR")
 
 #4
 def split_data():
@@ -42,6 +54,7 @@ def split_data():
 #5 
 def model():
    build_raw_data()
+   feature_selection()
 
     
 
