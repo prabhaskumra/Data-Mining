@@ -29,3 +29,7 @@ def split_data():
 #5 
 def model():
     print("model")
+
+
+if __name__ == "__main__":
+    model()
