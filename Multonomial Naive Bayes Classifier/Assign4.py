@@ -2,6 +2,7 @@
 # CS-458
 # Assignment-4
 
+import random
 import nltk
 from nltk.corpus import movie_reviews
 nltk.download('movie_reviews')
@@ -15,10 +16,14 @@ nltk.download('wordnet')
 from nltk.tokenize import word_tokenize
 
 
+raw_data =[]
+training_set = [] 
+testing_set = []
+
 #1
 def build_raw_data():
 
-    raw_data =[]
+    
     for category in movie_reviews.categories():
         # print(category)
         for fileid in movie_reviews.fileids(category):
@@ -46,7 +51,7 @@ def build_raw_data():
 
         lemmatizer = WordNetLemmatizer() 
         raw_data[i]['text'] = " ".join(lemmatizer.lemmatize(token) for token in removed_stop_words)
-        # print(" ")
+        # print(i)
         # print(raw_data[i])
 
 
@@ -61,12 +66,23 @@ def text_to_vector():
 
 #4
 def split_data():
-    print("hahaahahah")
+
+    shuffled_numbers = list(range(2000))
+    random.Random(4).shuffle(shuffled_numbers)
+    # print(shuffled_numbers)
+    counter = 0
+    
+    for i in range(1500):
+        training_set.append(raw_data[shuffled_numbers[counter]]) 
+        
+    for i in range(500):
+        testing_set.append(raw_data[shuffled_numbers[counter]])
 
 
 #5 
 def model():
    build_raw_data()
+   split_data()
    feature_selection()
 
     
