@@ -11,6 +11,7 @@ from nltk.corpus import stopwords
 nltk.download('stopwords')
 
 from nltk.stem import WordNetLemmatizer 
+nltk.download('wordnet')
 from nltk.tokenize import word_tokenize
 
 
@@ -19,7 +20,7 @@ def build_raw_data():
 
     raw_data =[]
     for category in movie_reviews.categories():
-        print(category)
+        # print(category)
         for fileid in movie_reviews.fileids(category):
             review_words = movie_reviews.words(fileid)
             review_text = ' '
@@ -28,14 +29,26 @@ def build_raw_data():
             review_dictionary = {'text':review_text, 'sentiment': category}
             raw_data.append(review_dictionary)
 
-    print (len(raw_data))
-    # print (raw_data[0])
+
     stop_words = set(stopwords.words('english')) 
 
-    # word_tokens = word_tokenize(raw_data[0]) 
-    # print(raw_data.[0])
+    for i in range(len(raw_data)):
+        # print (len(raw_data))
+        # print(" ")
+        # print (raw_data[i])
 
-    lemmatizer = WordNetLemmatizer() 
+        word_tokens = word_tokenize(raw_data[i]['text']) 
+        # print(word_tokens)
+        # print(raw_data[i]['sentiment'])
+
+        removed_stop_words = [word for word in word_tokens if word not in stop_words]
+        # print(removed_stop_words)
+
+        lemmatizer = WordNetLemmatizer() 
+        raw_data[i]['text'] = " ".join(lemmatizer.lemmatize(token) for token in removed_stop_words)
+        # print(" ")
+        # print(raw_data[i])
+
 
 #2
 def feature_selection():
