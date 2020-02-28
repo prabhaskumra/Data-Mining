@@ -15,6 +15,9 @@ from nltk.stem import WordNetLemmatizer
 nltk.download('wordnet')
 from nltk.tokenize import word_tokenize
 
+from sklearn.feature_extraction.text import TfidfVectorizer
+import pandas as pd
+
 
 raw_data =[]
 training_set = [] 
@@ -53,6 +56,8 @@ def build_raw_data():
         raw_data[i]['text'] = " ".join(lemmatizer.lemmatize(token) for token in removed_stop_words)
         # print(i)
         # print(raw_data[i])
+    
+    # print(raw_data['text'])
 
 
 #2
@@ -61,8 +66,22 @@ def feature_selection():
     
 
 #3
-def text_to_vector():
+def text_to_vector(list):
+
+    texts = []
+
+    for i in range(len(list)):
+        texts.append(list[i]['text'])
+    # texts = ["good movie", "not a good movie", "did not like", "i like it", "good one"]
+
+    print(texts)
+    tfidf = TfidfVectorizer(min_df = 0.05, max_df = 0.5, ngram_range = (3,3))
+    features = tfidf.fit_transform(texts)
+    result = pd.DataFrame(features.todense(), columns = tfidf.get_feature_names())
+    print(result)
+
     print("RR")
+
 
 #4
 def split_data():
@@ -84,6 +103,7 @@ def model():
    build_raw_data()
    split_data()
    feature_selection()
+   text_to_vector(training_set)
 
     
 
