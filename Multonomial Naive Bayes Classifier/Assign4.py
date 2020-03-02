@@ -69,33 +69,34 @@ def feature_selection():
 def text_to_vector(list):
 
     texts = []
-
     for i in range(len(list)):
         texts.append(list[i]['text'])
+    
     # texts = ["good movie", "not a good movie", "did not like", "i like it", "good one"]
 
-    print(texts)
-    tfidf = TfidfVectorizer(min_df = 0.05, max_df = 0.5, ngram_range = (3,3))
+    # print(texts)
+    tfidf = TfidfVectorizer(min_df = 0.1, max_df = 0.8, ngram_range = (1,2))
     features = tfidf.fit_transform(texts)
     result = pd.DataFrame(features.todense(), columns = tfidf.get_feature_names())
     print(result)
 
     print("RR")
 
-
 #4
 def split_data():
 
     shuffled_numbers = list(range(2000))
     random.Random(4).shuffle(shuffled_numbers)
-    # print(shuffled_numbers)
     counter = 0
-    
+
     for i in range(1500):
         training_set.append(raw_data[shuffled_numbers[counter]]) 
+        counter+=1
         
     for i in range(500):
         testing_set.append(raw_data[shuffled_numbers[counter]])
+        counter+=1
+
 
 
 #5 
