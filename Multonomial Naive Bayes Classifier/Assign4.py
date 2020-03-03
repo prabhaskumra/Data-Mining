@@ -61,7 +61,12 @@ def build_raw_data():
 
 
 #2
-def feature_selection():
+def feature_selection(doc):
+    # doc_words = set(doc)
+    # features = {}
+    # for word in word_features
+    #     features['contains(%s)' % word] = (word in doc_words)
+    # return features
     print("beep bop")
     
 
@@ -72,11 +77,9 @@ def text_to_vector(list):
     for i in range(len(list)):
         texts.append(list[i]['text'])
     
-    # texts = ["good movie", "not a good movie", "did not like", "i like it", "good one"]
-
-    # print(texts)
-    tfidf = TfidfVectorizer(min_df = 0.1, max_df = 0.8, ngram_range = (1,2))
+    tfidf = TfidfVectorizer(min_df = 0.05, max_df = 0.6, ngram_range = (1,2))
     features = tfidf.fit_transform(texts)
+    # print(features)
     result = pd.DataFrame(features.todense(), columns = tfidf.get_feature_names())
     print(result)
 
