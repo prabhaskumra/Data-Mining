@@ -3,25 +3,34 @@
 # Assignment-4
 
 import random
+import numpy as np
 import nltk
 from nltk.corpus import movie_reviews
-nltk.download('movie_reviews')
+# nltk.download('movie_reviews')
 
 from sklearn.naive_bayes import MultinomialNB
 from nltk.corpus import stopwords
-nltk.download('stopwords')
+# nltk.download('stopwords')
 
 from nltk.stem import WordNetLemmatizer 
-nltk.download('wordnet')
+# nltk.download('wordnet')
 from nltk.tokenize import word_tokenize
 
 from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.model_selection import train_test_split
 import pandas as pd
+
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
 
 raw_data =[]
 training_set = [] 
 testing_set = []
+training_sentiment = []
+X = [] 
+Y = []
+test_model = []
+y_true = []
 
 #1
 def build_raw_data():
@@ -54,42 +63,54 @@ def build_raw_data():
 
         lemmatizer = WordNetLemmatizer() 
         raw_data[i]['text'] = " ".join(lemmatizer.lemmatize(token) for token in removed_stop_words)
-        # print(i)
-        # print(raw_data[i])
-    
-    # print(raw_data['text'])
+        
 
 
 #2
-def feature_selection(doc):
-    # doc_words = set(doc)
-    # features = {}
-    # for word in word_features
-    #     features['contains(%s)' % word] = (word in doc_words)
-    # return features
-    print("beep bop")
-    
+def feature_selection():
 
+    training_texts = []
+    
+    for i in range(len(training_set)):
+        training_texts.append(training_set[i]['text'])
+        # print(training_set[i]['text'])
+
+        if training_set[i]['sentiment'] == 'pos':
+            Y.append(1)
+        else:
+            Y.append(-1)
+
+        
+    testing_texts = []
+    for i in range(len(testing_set)):
+        testing_texts.append(testing_set[i]['text'])
+
+        if testing_set[i]['sentiment'] == 'pos':
+            y_true.append(1)
+        else:
+            y_true.append(-1)
+
+    tfidf = TfidfVectorizer(min_df = 0.01, max_df = 0.6, ngram_range = (1,2))
+
+    tfidfm = tfidf.fit(training_texts)
+    X = tfidfm.transform(training_texts)
+    X = X.todense()
+
+    test_model = tfidfm.transform(testing_texts)
+    test_model = test_model.todense()
+
+    return X, Y, test_model
+    
 #3
 def text_to_vector(list):
-
-    texts = []
-    for i in range(len(list)):
-        texts.append(list[i]['text'])
-    
-    tfidf = TfidfVectorizer(min_df = 0.05, max_df = 0.6, ngram_range = (1,2))
-    features = tfidf.fit_transform(texts)
-    # print(features)
-    result = pd.DataFrame(features.todense(), columns = tfidf.get_feature_names())
-    print(result)
-
-    print("RR")
+    print("text to vector")
 
 #4
 def split_data():
 
+
     shuffled_numbers = list(range(2000))
-    random.Random(4).shuffle(shuffled_numbers)
+    random.Random(20).shuffle(shuffled_numbers)
     counter = 0
 
     for i in range(1500):
@@ -101,14 +122,22 @@ def split_data():
         counter+=1
 
 
-
 #5 
 def model():
-   build_raw_data()
-   split_data()
-   feature_selection()
-   text_to_vector(training_set)
+    build_raw_data()
+    split_data()
+    X, Y, test_model = feature_selection()
+    # text_to_vector(training_set)
 
+    clf = MultinomialNB()
+    clf.fit(X,Y)
+
+    y_pred =  (clf.predict(test_model))
+    # print(y_pred)
+
+    print("Accuracy: ", accuracy_score(y_true, y_pred))
+    print(classification_report(y_true, y_pred))
+    print(confusion_matrix(y_true, y_pred))
     
 
 if __name__ == "__main__":
