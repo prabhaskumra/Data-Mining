@@ -18,7 +18,7 @@ Y = training_set.am
 del X['car_model']
 del testing_set['car_model']
 
-y_true = copy.deepcopy(testing_set.am)
+y_true = testing_set.am
 
 clf = LogisticRegression(max_iter=1000)
 clf.fit(X,Y)
