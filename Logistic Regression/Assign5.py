@@ -3,17 +3,12 @@
 # CS-458
 
 import pandas as pd 
-import copy
-
 from sklearn.linear_model import LogisticRegression
-
 from sklearn.model_selection import train_test_split
-
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
 training_set = pd.read_csv('train.csv', header=0)
 testing_set = pd.read_csv('test.csv', header=0)
-
 
 del training_set['hp']
 del testing_set['hp']
@@ -24,7 +19,6 @@ del X['car_model']
 del testing_set['car_model']
 
 y_true = copy.deepcopy(testing_set.am)
-
 
 clf = LogisticRegression(max_iter=1000)
 clf.fit(X,Y)
