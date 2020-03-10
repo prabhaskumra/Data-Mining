@@ -1,2 +1,2 @@
 The training and testing csv files had last column without column heading. (something like 'train' and 'testing' lables)
-Which was messing up the table columen headings when I parsed the csv. So I just deleted those columns before parsing.
+Which was messing up the table columns headings when I parsed the csv. So I just deleted those columns in the csv before parsing.
