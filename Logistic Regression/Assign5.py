@@ -18,7 +18,7 @@ Y = training_set.am
 testing = testing_set[['mpg','cyl','disp','drat','wt','qsec','vs','gear','carb']]
 y_true = testing_set.am
 
-clf = LogisticRegression(max_iter=1000)
+clf = LogisticRegression(solver="lbfgs", max_iter=1000)
 clf.fit(X,Y)
 y_pred = clf.predict(testing)
 
