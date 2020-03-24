@@ -4,7 +4,11 @@
 
 import numpy as np
 from hmmlearn import hmm
-# np.reandom.seed(42)
+
+print("States:  A     B")
+print("----------------")
+print("Symbols: x  y  z")
+print("----------------")
 
 transmat = np.array([[0.304, 0.696],
                      [0.831, 0.169]])
@@ -24,5 +28,5 @@ h.emissionprob_ = emitmat
 
 # print (h.decode([0, 0, 1, 0, 0]))
 # print (h)
-X = np.atleast_2d([1, 3, 2, 2, 3, 3, 2, 3, 2, 2]).T
-print(h.decode(X))
+# X = np.atleast_2d([1, 3, 2, 2, 3, 3, 2, 3, 2, 2]).T
+# print(h.decode(X))
