@@ -10,6 +10,9 @@ print("----------------")
 print("Symbols: x  y  z")
 print("----------------")
 
+start_A = raw_input("Starting Probability of A:")
+start_B = raw_input("Starting Probability of B:")
+
 transmat = np.array([[0.304, 0.696],
                      [0.831, 0.169]])
 
