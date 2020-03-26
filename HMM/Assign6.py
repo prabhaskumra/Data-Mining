@@ -9,7 +9,8 @@ print("-----------------------")
 print("Symbols: x  y  z")
 
 states = {'x':0, 'y':1, 'z':2}
-# review_dictionary = {'text':review_text, 'sentiment': category}
+
+# 0 = x, 1 = y, 2 = z
 x = [0, 2, 1, 1, 2, 2, 1, 2, 1, 1]
 
 # Initial Probabilities
