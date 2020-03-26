@@ -3,33 +3,45 @@
 # CS-458
 
 import numpy as np
-from hmmlearn import hmm
 
 print("States:  A     B")
-print("----------------")
+print("-----------------------")
 print("Symbols: x  y  z")
-print("----------------")
 
-start_A = raw_input("Starting Probability of A:")
-start_B = raw_input("Starting Probability of B:")
+states = {'x':0, 'y':1, 'z':2}
+# review_dictionary = {'text':review_text, 'sentiment': category}
+x = [0, 2, 1, 1, 2, 2, 1, 2, 1, 1]
 
-transmat = np.array([[0.304, 0.696],
-                     [0.831, 0.169]])
+# Initial Probabilities
+pi = np.array([0.5, 0.5])
+print("-----------------------")
+print("Initial Probabilities:")
+print(pi)
 
-emitmat = np.array([[0.533, 0.065, 0.402],
-                    [0.342, 0.334, 0.324]])
+# Transition Probabilities
+A = np.array([[0.303, 0.697],[0.831, 0.169]])
+print("-----------------------")
+print("Transition Probabilites:")
+print(A)
 
-startprob = np.array([0.5, 0.5])
+# Emmision Probabilities
+B = np.array([[0.533, 0.065, 0.402],[0.342, 0.334, 0.324]])
+print("-----------------------")
+print("Emission Probabilites:")
+print(B)
+print("-----------------------")
+# Using forward algorithm
+M = len(x)
+N = pi.shape[0]
 
-h = hmm.MultinomialHMM(n_components=2)
-h.startprob_ = startprob
-h.transmat_ = transmat
-h.emissionprob_ = emitmat
+alpha = np.zeros((M, N))
+alpha[0, :] = pi * B[:,x[0]]
 
-# works fine
-# h.fit([[0, 0, 1, 0, 0]]) 
+for t in range(1, M):
+    for j in range(N):
+        for i in range(N):
+            alpha[t, j] += alpha[t-1, i] * A[i, j] * B[j, x[t]]
 
-# print (h.decode([0, 0, 1, 0, 0]))
-# print (h)
-# X = np.atleast_2d([1, 3, 2, 2, 3, 3, 2, 3, 2, 2]).T
-# print(h.decode(X))
+prob = np.sum(alpha[M-1,:])
+
+print("Probability of the sequence is: ", prob)
