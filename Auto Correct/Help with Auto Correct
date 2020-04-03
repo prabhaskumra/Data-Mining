@@ -1,0 +1,59 @@
+Help with Auto Correct
+Sidkazem Taghva
+No unread replies. No replies.
+###### Text Processing
+string = "This is the first line of the book. Is it?"
+string.lower()
+
+#notice that this is not changing the original string
+
+string = string.lower()
+
+
+# Remove punctuation, etc
+import re
+PUNCT=re.compile('[.,?]')
+string = re.sub(PUNCT, " ", string)
+
+#########Building the noisy text########
+
+#Define KEYS
+
+KEYS = ['qwerstyuiopasdfghjklzxcvbnm']
+list(KEYS)
+
+#['q', 'w',...., 'm']
+
+# for each character, build a list of three possible typos based on
+# the keyboard arrangement. For example, for 'a', the list-of-typos will be
+# something like ['s', 'q', 'w']
+
+
+import random
+
+random.(seed)
+
+r = random.rand()
+
+#based on this you
+#-- decide whether to replace a char with one of the possible characters
+#-- from the list-of-typos. for 10% error, if r is less than or equal
+#-- to 0.1, change the character, else leave as is.
+
+
+################Split Your data into training and testing ###########
+
+########### train your HMM #########
+#MLE plus smoothing, you use the 80% clean and corresponding noisy text.
+
+########implement Viterbie ########
+Apply Viterbie to the strings in the noisy test dataset (20%)
+Compare the path from Viterbie to corresponding string in the clean
+test dataset. Make sure your alignment is correct! Jorge Fonseca has
+published a nice algorithm on alignment (if you are ambitious, go read
+it).
+
+####### Report precision and recall #########
+Do NOT  expect a great number, this is just an exercise!
+
+Ponder: How does auto correct work in messaging or searching with Google?

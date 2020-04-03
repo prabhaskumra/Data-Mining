@@ -1,24 +1,27 @@
 # Prabhas Kumra
 # Assignment #7
 # CS-458
+import re
+import string
 
 filename = "Pride&Prejudice.txt"
 
-h = 0
-f = open("Pride&Prejudice.txt", "r")
-print(type(f))
-for x in f:
-    # print(x)
-    data += x.lower()
-    # print(x)
-    # h+=1
-    # if h == 5:
-    #     break
+# reading in the file and storing in an array
+with open(filename) as f:
+    data = f.readlines()
 
-# with open(filename) as f:
-#     data = f.readlines()
-#     data.lower()
+# converting letters to lowecase
+for x in range(len(data)):
+    data[x] = data[x].lower()
+
+# for i in range(5):
+#     print(data[i])
+print(string.punctuation)
+
+print('!Hello.'.strip(string.punctuation))
 
 
-# print(data)
-# print(data)
+foo = '!Hello.World!1!'
+print(foo)
+lulu = foo.strip(string.punctuation)
+print(lulu)
