@@ -3,25 +3,23 @@
 # CS-458
 import re
 import string
+import random
 
 filename = "Pride&Prejudice.txt"
+PUNCT=re.compile("[!#$%&()*+,-./:;<=>?@[\]^_`{|}~123456789']")
 
 # reading in the file and storing in an array
 with open(filename) as f:
     data = f.readlines()
 
+# for i in range(5):
+#     print(data[i])
+
 # converting letters to lowecase
 for x in range(len(data)):
     data[x] = data[x].lower()
+    data[x] = re.sub(PUNCT, " ", data[x])
 
-# for i in range(5):
-#     print(data[i])
-print(string.punctuation)
-
-print('!Hello.'.strip(string.punctuation))
-
-
-foo = '!Hello.World!1!'
-print(foo)
-lulu = foo.strip(string.punctuation)
-print(lulu)
+KEYS = ['qwerstyuiopasdfghjklzxcvbnm']
+keys = list(KEYS)
+print(keys)
