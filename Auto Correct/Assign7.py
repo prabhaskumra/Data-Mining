@@ -12,13 +12,14 @@ PUNCT=re.compile("[!#$%&()*+,-./:;<=>?@[\]^_`{|}~123456789']")
 with open(filename) as f:
     data = f.readlines()
 
-# for i in range(5):
-#     print(data[i])
-
 # converting letters to lowecase
 for x in range(len(data)):
     data[x] = data[x].lower()
     data[x] = re.sub(PUNCT, " ", data[x])
+
+
+for i in range(5):
+    print(data[i])
 
 KEYS = ['qwerstyuiopasdfghjklzxcvbnm']
 keys = list(KEYS)
