@@ -18,7 +18,7 @@ def readFile():
 
 def removePunct(data):
     PUNCT=re.compile("[!#$%&()*+,-./:;<=>?@[\]^_`{|}~123456789']")
-    
+
     # converting letters to lowecase and removing Punctuation 
     for x in range(len(data)):
         data[x] = data[x].lower()
@@ -28,37 +28,40 @@ def removePunct(data):
     #     print(data[i])
 
 def buildKeys():
-    KEYS = ['qwerstyuiopasdfghjklzxcvbnm']
-    keys = list(KEYS)
+    # KEYS = ['qwerstyuiopasdfghjklzxcvbnm']
+    # keys = list(KEYS)
 
-    a = ['s','q','w']
-    b = ['v','n','g']
-    c = ['v','x','d']
-    d = []
-    e = []
-    f = []
-    g = []
-    h = []
-    i = []
-    j = []
-    k = []
-    l = []
-    m = []
-    n = []
-    o = []
-    p = []
-    q = []
-    r = []
-    s = []
-    t = []
-    u = []
-    v = []
-    w = []
-    x = []
-    y = []
-    z = []
+    KEYS = {  
+		'a' : {0 : 's', 1 : 'q', 2 : 'w'}, 
+		'b' : {0 : 'v', 1 : 'n', 2 : 'g'},
+        'c' : {0 : 'v', 1 : 'x', 2 : 'd'},
+        'd' : {0 : 's', 1 : 'f', 2 : 'e'},
+        'e' : {0 : 'w', 1 : 'r', 2 : 'd'},
+        'f' : {0 : 'd', 1 : 'g', 2 : 'r'},
+        'g' : {0 : 'f', 1 : 'h', 2 : 'b'},
+        'h' : {0 : 'j', 1 : 'g', 2 : 'f'},
+        'i' : {0 : 'k', 1 : 'u', 2 : 'o'},
+        'j' : {0 : 'h', 1 : 'k', 2 : 'u'},
+        'k' : {0 : 'j', 1 : 'l', 2 : 'i'},
+        'l' : {0 : 'o', 1 : 'k', 2 : 'j'},
+        'm' : {0 : 'n', 1 : 'b', 2 : 'j'},
+        'n' : {0 : 'b', 1 : 'm', 2 : 'j'},
+        'o' : {0 : 'p', 1 : 'i', 2 : 'l'},
+        'p' : {0 : 'o', 1 : 'i', 2 : 'l'},
+        'q' : {0 : 'w', 1 : 'a', 2 : 'e'},
+        'r' : {0 : 't', 1 : 'e', 2 : 'f'},
+        's' : {0 : 'a', 1 : 'd', 2 : 'w'},
+        't' : {0 : 'r', 1 : 'y', 2 : 'u'},
+        'u' : {0 : 'y', 1 : 'i', 2 : 'j'},
+        'v' : {0 : 'c', 1 : 'b', 2 : ''f},
+        'w' : {0 : 'q', 1 : 'e', 2 : 's'},
+        'x' : {0 : 'z', 1 : 'c', 2 : 's'},
+        'y' : {0 : 't', 1 : 'u', 2 : 'h'},
+        'z' : {0 : 'a', 1 : 'x', 2 : 's'}
+        } 
 
-
+    print(KEYS['a'][1])
+   
 
     print(a[2])
     print(z)
