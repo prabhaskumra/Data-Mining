@@ -28,8 +28,6 @@ def removePunct(data):
     #     print(data[i])
 
 def buildKeys():
-    # KEYS = ['qwerstyuiopasdfghjklzxcvbnm']
-    # keys = list(KEYS)
 
     KEYS = {  
 		'a' : {0 : 's', 1 : 'q', 2 : 'w'}, 
@@ -53,23 +51,27 @@ def buildKeys():
         's' : {0 : 'a', 1 : 'd', 2 : 'w'},
         't' : {0 : 'r', 1 : 'y', 2 : 'u'},
         'u' : {0 : 'y', 1 : 'i', 2 : 'j'},
-        'v' : {0 : 'c', 1 : 'b', 2 : ''f},
+        'v' : {0 : 'c', 1 : 'b', 2 : 'f'},
         'w' : {0 : 'q', 1 : 'e', 2 : 's'},
         'x' : {0 : 'z', 1 : 'c', 2 : 's'},
         'y' : {0 : 't', 1 : 'u', 2 : 'h'},
         'z' : {0 : 'a', 1 : 'x', 2 : 's'}
         } 
 
-    print(KEYS['a'][1])
-   
+    return KEYS
 
-    print(a[2])
-    print(z)
+def buildNoisyFile():
+    # random.seed(3)
+    r = random.random()
+    print(r)
 
 def main():
     data = readFile()
     removePunct(data)
-    buildKeys()
+    KEYS = buildKeys()
+    # print(KEYS)
+
+    buildNoisyFile()
 
 if __name__ == "__main__":
     main()
