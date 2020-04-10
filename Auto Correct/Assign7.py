@@ -102,6 +102,25 @@ def main():
 
     noisyFile = buildNoisyFile(data, KEYS)
 
+    originalTraining = []
+    noisyTraining = []
+    originalTesting = []
+    noisyTesting = []
+
+    # splitting the data 
+    for x in range(len(originalData)):
+        if x < 423 :
+            originalTesting.append(originalData[x]) 
+            noisyTesting.append(noisyFile[x])
+        else:
+            originalTraining.append(originalData[x])
+            noisyTraining.append(noisyFile[x])
+
+
+    print((originalTesting[2][12]))
+    print((originalTraining[2][12]))
+    print((noisyTesting[2][12]))
+    print((noisyTraining[2][12]))
 
 if __name__ == "__main__":
     main()
