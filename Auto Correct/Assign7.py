@@ -109,7 +109,7 @@ def main():
 
     # splitting the data 
     for x in range(len(originalData)):
-        if x < 423 :
+        if x < len(originalData)*.20 :
             originalTesting.append(originalData[x]) 
             noisyTesting.append(noisyFile[x])
         else:
@@ -117,10 +117,7 @@ def main():
             noisyTraining.append(noisyFile[x])
 
 
-    print((originalTesting[2][12]))
-    print((originalTraining[2][12]))
-    print((noisyTesting[2][12]))
-    print((noisyTraining[2][12]))
+    states = ('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z')
 
 if __name__ == "__main__":
     main()
