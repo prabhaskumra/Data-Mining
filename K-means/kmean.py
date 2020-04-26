@@ -1,28 +1,62 @@
 # Prabhas Kumra
-# CS458
-# Assignment 8
+# CS-458
+# Assignment #8
 
 import numpy as np
+import random
 
-data = np.genfromtxt("data.txt", delimiter=",")
+random.seed(20)
 
-k = int(data[0][0])
+def converged(new_centers, centers):
+    return (set([tuple(a) for a in new_centers]) == set([tuple(a) for a in centers]))
 
-m = int(data[0][1])
+def findClusters(points, new_centers):
+    clusters = {}
+    for x in points:
+        min_dist = min([(i[0], np.linalg.norm(x-new_centers[i[0]])) \
+                    for i in enumerate(new_centers)], key=lambda t:t[1])[0]
+        try:
+            clusters[min_dist].append(x)
+        except KeyError:
+            clusters[min_dist] = [x]
 
-hell = {1.37, 1.1
-        1.3, 0.2
-        0.6, 2.8 
-        3.0, 3.2 
-        1.2, 0.7 
-        1.4, 1.6 
-        1.2, 1.0 
-        1.2, 1.1 
-        0.6, 1.5 
-        1.8, 2.6 
-        1.2, 1.3 
-        1.2, 1.0 
-        0.0, 1.9}
+    return clusters
 
-data = np.delete(data,0,0)
+def k_mean(points, k):
+    centers = random.sample(list(points), k)
+    new_centers = random.sample(list(points), k)
 
+    while not converged(new_centers, centers):
+        centers = new_centers
+        clusters = findClusters(points, new_centers)
+
+        newPoints = []
+        keys = sorted(clusters.keys())
+        for k in keys:
+            newPoints.append(np.mean(clusters[k], axis = 0))
+        new_centers = newPoints
+
+    return(new_centers, clusters)
+
+
+def main():
+    data = np.genfromtxt("data.txt", delimiter=",")
+
+    k = int(data[0][0])
+    m = int(data[0][1])
+
+    data = np.delete(data,0,0)
+
+    print("Input Points:")
+    print(data)
+
+    new_centers, clusters = k_mean(data, k)
+
+    print("")
+    print("Output:")
+    print(new_centers[0])
+    print(new_centers[1])
+    # print(clusters)
+
+if __name__ == "__main__":
+    main()
